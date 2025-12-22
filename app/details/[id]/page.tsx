@@ -15,6 +15,18 @@ export default async function DetailsPage({
       <div className="p-5 flex flex-col md:flex-row gap-5 justify-between">
         <div>
           <h1 className="font-bold text-2xl">{data.name}</h1>
+          {data.polysemyWords.length > 1 && (
+            <div className="mb-2">
+              {data.polysemyWords.map(
+                (word, index) =>
+                  word !== data.name && (
+                    <Badge key={index} className="mr-2" variant={"outline"}>
+                      {word}
+                    </Badge>
+                  ),
+              )}
+            </div>
+          )}
           <h2 className="mb-2 text-gray-400">{data.description}</h2>
         </div>
         <video
@@ -33,7 +45,7 @@ export default async function DetailsPage({
             {data.sentences.map((sentence) => (
               <div
                 key={sentence.id}
-                className="border-b py-5 flex md:flex-row flex-col gap-5"
+                className="border-b py-5 flex md:flex-row gap-5 flex-col-reverse"
               >
                 <video
                   className="max-w-md rounded-lg md:mx-0 mx-auto w-full"
