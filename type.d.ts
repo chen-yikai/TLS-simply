@@ -6,6 +6,7 @@ type Detail = {
   polysemy: number;
   clip: string;
   sentences: Sentence[];
+  polysemyWords: string[];
 };
 
 type Sentence = {
@@ -16,7 +17,13 @@ type Sentence = {
   clip: string;
 };
 
+type Search = {
+  results: SearchResult[];
+  total: number;
+};
+
 type SearchResult = {
   id: number;
+  recordId: number;
   name: string;
 };
