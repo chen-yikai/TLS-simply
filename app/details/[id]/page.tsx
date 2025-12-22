@@ -18,7 +18,7 @@ export default async function DetailsPage({
           <h2 className="mb-2 text-gray-400">{data.description}</h2>
         </div>
         <video
-          className="max-w-md mx-auto md:mx-0 rounded-lg"
+          className="max-w-md mx-auto md:mx-0 rounded-lg w-full"
           src={data.clip}
           controls
           loop
@@ -36,7 +36,7 @@ export default async function DetailsPage({
                 className="border-b py-5 flex md:flex-row flex-col gap-5"
               >
                 <video
-                  className="max-w-md rounded-lg md:mx-0 mx-auto"
+                  className="max-w-md rounded-lg md:mx-0 mx-auto w-full"
                   src={sentence.clip}
                   controls
                   loop

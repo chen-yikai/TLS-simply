@@ -56,6 +56,7 @@ export default function Header() {
               setTimeout(() => {
                 setSearchQueryResults([]);
                 setActiveSearch(false);
+                setSearchQuery("");
               }, 200);
             }}
           />
