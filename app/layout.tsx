@@ -21,8 +21,8 @@ const jetBrainsMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TSL Dictionary",
-  description: "Taiwan Sign Language Dictionary",
+  title: "手語通",
+  description: "簡單、聰明的台灣手語辭典",
 };
 
 export default function RootLayout({
@@ -32,6 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/favicon.svg" sizes="any" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${jetBrainsMono.variable} antialiased max-w-4xl mx-auto`}
       >

@@ -1,3 +1,4 @@
+import CustomPlayer from "@/components/CustomPlayer";
 import { Badge } from "@/components/ui/badge";
 import { apiHost } from "@/lib/utils";
 
@@ -29,14 +30,7 @@ export default async function DetailsPage({
           )}
           <h2 className="mb-2 text-gray-400">{data.description}</h2>
         </div>
-        <video
-          className="max-w-md mx-auto md:mx-0 rounded-lg w-full"
-          src={data.clip}
-          controls
-          loop
-          autoPlay
-          muted
-        />
+        <CustomPlayer src={data.clip} />
       </div>
       {data.sentences.length > 0 && (
         <div className="p-5 border-t">
@@ -47,13 +41,7 @@ export default async function DetailsPage({
                 key={sentence.id}
                 className="border-b py-5 flex md:flex-row gap-5 flex-col-reverse"
               >
-                <video
-                  className="max-w-md rounded-lg md:mx-0 mx-auto w-full"
-                  src={sentence.clip}
-                  controls
-                  loop
-                  muted
-                />
+                <CustomPlayer src={sentence.clip} />
                 <div className="flex flex-col gap-2 text-lg">
                   <p>
                     <Badge>手語</Badge>&ensp;{sentence.gloss}
