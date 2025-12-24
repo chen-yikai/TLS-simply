@@ -7,12 +7,11 @@ export default function CustomPlayer({
 }) {
   return (
     <video
-      className={`${className} max-w-md mx-auto md:mx-0 rounded-lg w-full relative overflow-hidden`}
+      className={`${className} max-w-md mx-auto md:mx-0 rounded-lg w-full`}
       src={src}
       controls
-      loop
       autoPlay
-      muted
+      loop
     />
   );
 }

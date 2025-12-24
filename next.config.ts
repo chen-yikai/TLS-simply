@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
         source: "/api/:path*",
         destination: `${process.env.API_HOST}/:path*`,
       },
+      {
+        source: "/media/:path*",
+        destination: "https://twtsl.ccu.edu.tw/:path*",
+      },
     ];
   },
 };

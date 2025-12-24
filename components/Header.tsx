@@ -32,10 +32,10 @@ export default function Header() {
     return () => clearTimeout(delayDebounceFn);
   }, [searchQuery]);
   return (
-    <header className="top-0 fixed max-w-4xl w-full px-2">
+    <header className="top-0 fixed max-w-4xl w-full px-2 z-10">
       <div className="border rounded-b-lg bg-white w-full px-5 h-15 flex-row flex items-center justify-between gap-2">
         <div className={`${activeSearch ? "hidden" : "block"}`}>
-          <Link href="/">
+          <Link href="/" className="flex items-center gap-2 py-2">
             <h1 className="text-md font-bold hover:underline underline-offset-4">
               手語通
             </h1>

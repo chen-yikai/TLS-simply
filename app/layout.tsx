@@ -32,13 +32,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <link rel="icon" href="/favicon.svg" sizes="any" />
+      <link rel="icon" href="/favicon.svg" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${jetBrainsMono.variable} antialiased max-w-4xl mx-auto`}
       >
         <Header />
         <div className="h-25" />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
