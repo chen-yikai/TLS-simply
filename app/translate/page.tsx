@@ -24,6 +24,10 @@ export default function TranslatePage() {
     }
   }, [state, currentIndex]);
 
+  React.useEffect(() => {
+    setCurrentIndex(0);
+  }, [state]);
+
   const handleVideoTimeUpdate = () => {
     if (videoRef.current?.currentTime === videoRef.current?.duration) {
       if (currentIndex + 1 >= (state?.results.length || 0)) {

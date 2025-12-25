@@ -17,6 +17,14 @@ export async function submitTranslate(initState: any, formData: FormData) {
       method: "POST",
     },
   );
+
   const data = await req.json();
+  // TODO: Handle exceptions response
+  if (!data.results)
+    return {
+      query: source,
+      message: "翻譯失敗，請稍後再試",
+      results: [],
+    };
   return data as TranslateResult;
 }
