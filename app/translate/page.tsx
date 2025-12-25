@@ -16,7 +16,6 @@ export default function TranslatePage() {
   );
   const [currentVideo, setCurrentVideo] = React.useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
-  const [videoDuration, setVideoDuration] = React.useState<number>(0);
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
   React.useEffect(() => {
@@ -26,11 +25,11 @@ export default function TranslatePage() {
   }, [state, currentIndex]);
 
   const handleVideoTimeUpdate = () => {
-    if (currentIndex + 1 >= (state?.results.length || 0)) {
-      setCurrentIndex(0);
-      return;
-    }
     if (videoRef.current?.currentTime === videoRef.current?.duration) {
+      if (currentIndex + 1 >= (state?.results.length || 0)) {
+        setCurrentIndex(0);
+        return;
+      }
       setCurrentIndex((prevIndex) => {
         return prevIndex + 1;
       });
