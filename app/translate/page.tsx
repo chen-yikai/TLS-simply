@@ -6,6 +6,8 @@ import { submitTranslate } from "./actions";
 import Link from "next/link";
 import React from "react";
 import { LoaderIcon } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import CustomPlayer from "@/components/CustomPlayer";
 
 export default function TranslatePage() {
   const [state, formAction, pending] = useActionState(
@@ -13,6 +15,25 @@ export default function TranslatePage() {
     undefined,
   );
   const [currentVideo, setCurrentVideo] = React.useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = React.useState<number>(0);
+  const [videoDuration, setVideoDuration] = React.useState<number>(0);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    if (state?.results && state.results.length > 0) {
+      setCurrentVideo(state.results[currentIndex].sourceInfo.clip);
+    }
+  }, [state, currentIndex]);
+
+  const handleVideoTimeUpdate = () => {
+    if (currentIndex + 1 >= (state?.results.length || 0)) return;
+    if (videoRef.current?.currentTime === videoRef.current?.duration) {
+      setCurrentIndex((prevIndex) => {
+        return prevIndex + 1;
+      });
+    }
+  };
+
   return (
     <section>
       <div className="p-5">
@@ -32,20 +53,44 @@ export default function TranslatePage() {
             </Button>
           </div>
         </form>
-        <div></div>
-        {state?.results && (
-          <div className="mt-5 border border-dashed rounded-lg flex flex-row p-2 gap-2">
-            {state.results.map((item, index) => (
-              <Link
-                key={index}
-                href={`/details/${item.recordId}`}
-                className="border rounded-lg px-2 py-1 hover:border-sky-500 transition bg-white"
-              >
-                {item.result}
-              </Link>
-            ))}
-          </div>
-        )}
+        <div className="mt-10">
+          {!pending && currentVideo !== null && state?.results && (
+            <div className="flex flex-col justify-center items-center text-center">
+              <CustomPlayer
+                src={currentVideo}
+                ref={videoRef}
+                loop={false}
+                className="aspect-4/3 max-w-xl"
+                onTimeUpdate={handleVideoTimeUpdate}
+              />
+              <div className="mt-2 w-full">
+                <h1 className="font-bold text-xl">
+                  {state.results[currentIndex].result}
+                </h1>
+                <p className="text-gray-400">
+                  {state.results[currentIndex].sourceInfo.description}
+                </p>
+              </div>
+            </div>
+          )}
+          {pending && <Skeleton className="h-12 w-full mt-5 rounded-lg" />}
+          {state?.results && !pending && (
+            <div className="mt-5 border border-dashed rounded-lg flex flex-row p-2 gap-2 flex-wrap">
+              {state.results.map((item, index) => (
+                <Button
+                  key={index}
+                  variant="outline"
+                  onClick={() => {
+                    setCurrentIndex(index);
+                  }}
+                  className={`border rounded-lg px-2 py-1 hover:border-sky-500 transition bg-white ${currentIndex === index ? "border-sky-500 drop-shadow-lg" : ""}`}
+                >
+                  {item.result}
+                </Button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

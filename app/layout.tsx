@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <link rel="icon" href="/favicon.svg" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${jetBrainsMono.variable} antialiased max-w-4xl mx-auto  bg-linear-to-r from-sky-50`}
+        className={`${geistSans.variable} ${geistMono.variable} ${jetBrainsMono.variable} antialiased max-w-4xl mx-auto bg-linear-to-r from-sky-100`}
       >
         <Header />
         <div className="h-25" />

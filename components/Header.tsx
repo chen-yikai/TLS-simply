@@ -16,7 +16,10 @@ export default function Header() {
   >([]);
   React.useEffect(() => {
     const fetchSearchResults = async () => {
-      if (searchQuery.trim().length === 0) return;
+      if (searchQuery.trim().length === 0) {
+        setSearchQueryResults([]);
+        return;
+      }
       try {
         const response = await fetch(`/api/search?q=${searchQuery}&limit=10`);
         const data: Search = await response.json();
@@ -27,7 +30,7 @@ export default function Header() {
     };
     const delayDebounceFn = setTimeout(() => {
       fetchSearchResults();
-    }, 300);
+    }, 100);
     return () => clearTimeout(delayDebounceFn);
   }, [searchQuery]);
   return (
@@ -58,7 +61,7 @@ export default function Header() {
             }}
           />
           <ul
-            className={`absolute top-full left-0 w-full bg-white border shadow-lg overflow-auto max-h-50 rounded-md mt-5 z-10 ${searchQueryResults.length === 0 ? "hidden" : ""}`}
+            className={`absolute top-full left-0 w-full bg-white border shadow-lg overflow-auto max-h-52 rounded-md mt-5 z-10 ${searchQueryResults.length === 0 ? "hidden" : ""}`}
           >
             {searchQueryResults.map((result) => (
               <li key={result.id} className="border-b last:border-0">
