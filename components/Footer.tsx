@@ -28,6 +28,10 @@ export default function Footer() {
               </ul>
             </AccordionContent>
           </AccordionItem>
+          <AccordionItem value="contact" className="px-5">
+            <AccordionTrigger>錯誤回報</AccordionTrigger>
+            <AccordionContent className="px-2"></AccordionContent>
+          </AccordionItem>
           <AccordionItem value="copyright" className="px-5">
             <AccordionTrigger>版權聲明</AccordionTrigger>
             <AccordionContent className="px-2">

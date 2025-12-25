@@ -34,11 +34,11 @@ export default function RootLayout({
     <html lang="en">
       <link rel="icon" href="/favicon.svg" />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${jetBrainsMono.variable} antialiased max-w-4xl mx-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} ${jetBrainsMono.variable} antialiased max-w-4xl mx-auto  bg-linear-to-r from-sky-50`}
       >
         <Header />
         <div className="h-25" />
-        <main>{children}</main>
+        {children}
         <Footer />
       </body>
     </html>

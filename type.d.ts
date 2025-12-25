@@ -27,3 +27,15 @@ type SearchResult = {
   recordId: number;
   name: string;
 };
+
+type TranslateResult = {
+  query: strign;
+  total: number;
+  results: TranslateItem[];
+};
+
+type TranslateItem = {
+  recordId: number;
+  result: string;
+  source: string;
+};

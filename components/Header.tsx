@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Input } from "./ui/input";
-import { Search, X } from "lucide-react";
+import { Search, WandSparkles, X } from "lucide-react";
 import { Button } from "./ui/button";
 import React from "react";
 
@@ -33,7 +33,7 @@ export default function Header() {
   }, [searchQuery]);
   return (
     <header className="top-0 fixed max-w-4xl w-full px-2 z-10">
-      <div className="border rounded-b-lg bg-white w-full px-5 h-15 flex-row flex items-center justify-between gap-2">
+      <div className="drop-shadow-md border rounded-b-lg bg-white w-full px-5 h-15 flex-row flex items-center justify-between gap-2">
         <div className={`${activeSearch ? "hidden" : "block"}`}>
           <Link href="/" className="flex items-center gap-2 py-2">
             <h1 className="text-md font-bold hover:underline underline-offset-4">
@@ -61,7 +61,7 @@ export default function Header() {
             }}
           />
           <ul
-            className={`absolute top-full left-0 w-full bg-white border mt-2 rounded-md shadow-lg z-10 ${searchQueryResults.length === 0 ? "hidden" : ""}`}
+            className={`absolute top-full left-0 w-full bg-white border shadow-lg rounded-md mt-5 z-10 ${searchQueryResults.length === 0 ? "hidden" : ""}`}
           >
             {searchQueryResults.map((result) => (
               <li key={result.id} className="border-b last:border-0">
@@ -76,17 +76,11 @@ export default function Header() {
           </ul>
         </div>
         <nav className="flex items-center gap-2">
-          {/* {activeSearch && ( */}
-          {/*   <Button */}
-          {/*     variant="outline" */}
-          {/*     size="icon" */}
-          {/*     onClick={() => { */}
-          {/*       setActiveSearch(false); */}
-          {/*     }} */}
-          {/*   > */}
-          {/*     <Search /> */}
-          {/*   </Button> */}
-          {/* )} */}
+          <Link href="/translate">
+            <Button variant="outline" size="icon">
+              <WandSparkles />
+            </Button>
+          </Link>
           <Button
             variant="outline"
             size="icon"
