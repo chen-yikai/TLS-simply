@@ -4,12 +4,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { useActionState } from "react";
 import { submitTranslate } from "./actions";
 import Link from "next/link";
+import React from "react";
+import { LoaderIcon } from "lucide-react";
 
 export default function TranslatePage() {
   const [state, formAction, pending] = useActionState(
     submitTranslate,
     undefined,
   );
+  const [currentVideo, setCurrentVideo] = React.useState<string | null>(null);
   return (
     <section>
       <div className="p-5">
@@ -22,23 +25,24 @@ export default function TranslatePage() {
               className="w-full p-5 min-h-25"
               name="source"
               defaultValue={state?.query || ""}
+              required
             />
             <Button type="submit" disabled={pending}>
-              翻譯
+              {pending ? <LoaderIcon className="animate-spin" /> : "翻譯"}
             </Button>
           </div>
         </form>
-        {state && (
-          <div className="mt-5 border rounded-lg">
+        <div></div>
+        {state?.results && (
+          <div className="mt-5 border border-dashed rounded-lg flex flex-row p-2 gap-2">
             {state.results.map((item, index) => (
-              <div
+              <Link
                 key={index}
-                className={`border-b ${index === state.results.length - 1 ? "border-none" : ""} p-3`}
+                href={`/details/${item.recordId}`}
+                className="border rounded-lg px-2 py-1 hover:border-sky-500 transition bg-white"
               >
-                <Link href={`/details/${item.recordId}`} className="flex">
-                  {item.result}
-                </Link>
-              </div>
+                {item.result}
+              </Link>
             ))}
           </div>
         )}

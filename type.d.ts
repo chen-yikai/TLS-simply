@@ -38,4 +38,10 @@ type TranslateItem = {
   recordId: number;
   result: string;
   source: string;
+  sourceInfo: TranslateSourceInfo;
+};
+
+type TranslateSourceInfo = {
+  clip: string;
+  description: string;
 };

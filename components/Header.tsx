@@ -4,6 +4,8 @@ import { Input } from "./ui/input";
 import { Search, WandSparkles, X } from "lucide-react";
 import { Button } from "./ui/button";
 import React from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { ScrollArea } from "./ui/scroll-area";
 
 export default function Header() {
   const [activeSearch, setActiveSearch] = React.useState(false);
@@ -14,12 +16,9 @@ export default function Header() {
   >([]);
   React.useEffect(() => {
     const fetchSearchResults = async () => {
-      if (searchQuery.trim() === "") {
-        setSearchQueryResults([]);
-        return;
-      }
+      if (searchQuery.trim().length === 0) return;
       try {
-        const response = await fetch(`/api/search?q=${searchQuery}`);
+        const response = await fetch(`/api/search?q=${searchQuery}&limit=10`);
         const data: Search = await response.json();
         setSearchQueryResults(data.results);
       } catch (error) {
@@ -54,14 +53,12 @@ export default function Header() {
             onChange={(x) => setSearchQuery(x.target.value)}
             onBlur={() => {
               setTimeout(() => {
-                setSearchQueryResults([]);
                 setActiveSearch(false);
-                setSearchQuery("");
               }, 200);
             }}
           />
           <ul
-            className={`absolute top-full left-0 w-full bg-white border shadow-lg rounded-md mt-5 z-10 ${searchQueryResults.length === 0 ? "hidden" : ""}`}
+            className={`absolute top-full left-0 w-full bg-white border shadow-lg overflow-auto max-h-50 rounded-md mt-5 z-10 ${searchQueryResults.length === 0 ? "hidden" : ""}`}
           >
             {searchQueryResults.map((result) => (
               <li key={result.id} className="border-b last:border-0">
@@ -76,25 +73,37 @@ export default function Header() {
           </ul>
         </div>
         <nav className="flex items-center gap-2">
-          <Link href="/translate">
-            <Button variant="outline" size="icon">
-              <WandSparkles />
-            </Button>
-          </Link>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={() => {
-              setActiveSearch(!activeSearch);
-              if (!activeSearch) {
-                setTimeout(() => {
-                  inputRef.current?.focus();
-                }, 100);
-              }
-            }}
-          >
-            {activeSearch ? <X /> : <Search />}
-          </Button>
+          {activeSearch || (
+            <Link href="/translate">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline" size="icon">
+                    <WandSparkles />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>翻譯</TooltipContent>
+              </Tooltip>
+            </Link>
+          )}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => {
+                  setActiveSearch(!activeSearch);
+                  if (!activeSearch) {
+                    setTimeout(() => {
+                      inputRef.current?.focus();
+                    }, 100);
+                  }
+                }}
+              >
+                {activeSearch ? <X /> : <Search />}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>搜尋</TooltipContent>
+          </Tooltip>
         </nav>
       </div>
     </header>
