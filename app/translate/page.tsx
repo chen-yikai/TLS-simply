@@ -26,7 +26,10 @@ export default function TranslatePage() {
   }, [state, currentIndex]);
 
   const handleVideoTimeUpdate = () => {
-    if (currentIndex + 1 >= (state?.results.length || 0)) return;
+    if (currentIndex + 1 >= (state?.results.length || 0)) {
+      setCurrentIndex(0);
+      return;
+    }
     if (videoRef.current?.currentTime === videoRef.current?.duration) {
       setCurrentIndex((prevIndex) => {
         return prevIndex + 1;
