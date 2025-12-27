@@ -50,7 +50,7 @@ export default function Header() {
         >
           <Input
             type="search"
-            placeholder="搜尋手語詞彙..."
+            placeholder="搜尋詞彙..."
             ref={inputRef}
             value={searchQuery}
             onChange={(x) => setSearchQuery(x.target.value)}
@@ -105,7 +105,9 @@ export default function Header() {
                 {activeSearch ? <X /> : <Search />}
               </Button>
             </TooltipTrigger>
-            <TooltipContent>搜尋</TooltipContent>
+            <TooltipContent>
+              {activeSearch ? "關閉搜尋欄" : "搜尋"}
+            </TooltipContent>
           </Tooltip>
         </nav>
       </div>

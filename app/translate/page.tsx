@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useActionState } from "react";
 import { submitTranslate } from "./actions";
-import Link from "next/link";
 import React from "react";
 import { LoaderIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import CustomPlayer from "@/components/CustomPlayer";
+import { Badge } from "@/components/ui/badge";
 
 export default function TranslatePage() {
   const [state, formAction, pending] = useActionState(
@@ -43,7 +43,9 @@ export default function TranslatePage() {
   return (
     <section>
       <div className="p-5">
-        <h1 className="font-bold text-2xl">翻譯</h1>
+        <h1 className="font-bold text-2xl flex items-center gap-2">
+          翻譯<Badge variant="outline">實驗功能</Badge>
+        </h1>
         <p className="text-gray-400">將語句使用存在於辭典中的條目表達</p>
         <form action={formAction} className="w-full">
           <div className="mt-5 flex flex-col gap-3">
@@ -96,6 +98,9 @@ export default function TranslatePage() {
               ))}
             </div>
           )}
+          <p className="text-gray-400 m-2 text-right select-none">
+            翻譯結果為AI生成，經常出錯，僅供參考。
+          </p>
         </div>
       </div>
     </section>
