@@ -44,7 +44,7 @@ export default function TranslatePage() {
     <section>
       <div className="p-5">
         <h1 className="font-bold text-2xl flex items-center gap-2">
-          翻譯<Badge variant="outline">實驗功能</Badge>
+          翻譯<Badge variant="outline">測試中</Badge>
         </h1>
         <p className="text-gray-400">將語句使用存在於辭典中的條目表達</p>
         <form action={formAction} className="w-full">
